@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
+import Timer from "./Timer";
 
 const Header = (props) => {
 
@@ -6,29 +7,13 @@ const Header = (props) => {
         border: '1px solid red',
     }
 
-    const checkFoundCharacters = () => {
-        //console.log('List of found characters:', characters.wilma, characters.wally, characters.wizard)
-        if(props.wilmaWasClicked && props.wallyWasClicked && props.wizardWasClicked) {
-          alert(`You have found: ${props.characters.wilma} ${props.characters.wally} ${props.characters.wizard}`)
-          return `${props.characters.wilma} && ${props.characters.wally} && ${props.characters.wizard}`
-        } else if(props.wilmaWasClicked && props.wallyWasClicked) {
-          return `${props.characters.wilma} && ${props.characters.wally}`
-        } else if (props.wilmaWasClicked && props.wizardWasClicked) {
-          return `${props.characters.wilma} && ${props.characters.wizard}`
-        } else if (props.wallyWasClicked && props.wizardWasClicked) {
-          return `${props.characters.wally} && ${props.characters.wizard}`
-        } else if(props.wallyWasClicked) {
-          return `${props.characters.wally}`
-        } else if (props.wizardWasClicked) {
-          return `${props.characters.wizard}`
-        } else if (props.wilmaWasClicked ) {
-          return `${props.characters.wilma}`
-        }
-      }
-
     return (
         <div style={style}>
-            <p>You have found: {checkFoundCharacters()}</p>
+            <p>You have found: {props.checkFoundCharacters()}</p>
+            <Timer 
+                wilmaWasClicked={props.wilmaWasClicked}
+                wallyWasClicked={props.wallyWasClicked}
+                wizardWasClicked={props.wizardWasClicked}></Timer>
         </div>
     )
 }

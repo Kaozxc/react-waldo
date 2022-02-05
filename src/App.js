@@ -12,6 +12,7 @@ const App = (props) => {
   const [wizardWasClicked, setWizardWasClicked] = useState(false);
   const [wilmaWasClicked, setWilmaWasClicked] = useState(false);
   const [renderDropdown, setRenderDropdown] = useState(false);
+  const [gameWon, setGameWon] = useState(false);
 
   // const getCoordinates = (e) => {
   //   let coordsX = e.nativeEvent.offsetX;
@@ -38,28 +39,30 @@ const App = (props) => {
   // }
 
   const handleClick = (e) => {
-    
-    console.log('event target value: ', e.target.alt);
-    console.log('halko kordy', coordinates.x, coordinates.y)
       if(coordinates.x <= 521 && coordinates.x >= 495 && coordinates.y <= 309 && coordinates.y >= 262 && e.target.alt === 'wally') {
-        alert('YES, THATS WALLY');
+        alert('You have found Wally!');
         setWallyWasClicked(true);
         setCharacters({...characters, [e.target.alt]: 'Wally'})
         setRenderDropdown(false)
       } else if(coordinates.x >= 727 && coordinates.x <= 741 && coordinates.y <= 320 && coordinates.y >= 297 && e.target.alt === 'wilma') {
-        alert('Yes thats Wilma')
+        alert('You have found Wilma!')
         setWilmaWasClicked(true);
         setCharacters({...characters, [e.target.alt]: 'Wilma'})
         setRenderDropdown(false)
       } else if (coordinates.x >= 0 && coordinates.x <= 12 && coordinates.y >= 244  && coordinates.y <= 282 && e.target.alt === 'wizard') {
-        alert('Yes, thats Wizard');
+        alert('You have found Wizard!');
         setWizardWasClicked(true);
         setCharacters({...characters, [e.target.alt]: 'Wizard'})
         setRenderDropdown(false)
-      } else {
-        console.log('nooo');
-      }
+      } else if (e.target.alt === 'wizard') {
+        alert(`That's not a Wizard!`)
+      } else if (e.target.alt === 'wally') {
+        alert(`That's not a Wally!`)
+      } else if (e.target.alt === 'wilma') {
+        alert(`That's not a Wilma!`)
+      } 
   }
+
 
   useEffect(() => {
     setRenderDropdown(true);
@@ -77,7 +80,7 @@ const App = (props) => {
     document.getElementById("floatdiv").style.top=y+"px";
     console.log(x)
     console.log(y)
-    setCoordinates({x: x, y: y,});
+    setCoordinates({x: x, y: y});
     console.log('coordinates set', coordinates)
     return {
       x,
@@ -85,9 +88,35 @@ const App = (props) => {
     }
   }
 
+  const checkFoundCharacters = () => {
+    //console.log('List of found characters:', characters.wilma, characters.wally, characters.wizard)
+    if(wilmaWasClicked && wallyWasClicked && wizardWasClicked) {
+      setGameWon(true);
+      alert('Game won')
+      return `${characters.wilma} && ${characters.wally} && ${characters.wizard}`
+    } else if(wilmaWasClicked && wallyWasClicked) {
+      return `${characters.wilma} && ${characters.wally}`
+    } else if (wilmaWasClicked && wizardWasClicked) {
+      return `${characters.wilma} && ${characters.wizard}`
+    } else if (wallyWasClicked && wizardWasClicked) {
+      return `${characters.wally} && ${characters.wizard}`
+    } else if(wallyWasClicked) {
+      return `${characters.wally}`
+    } else if (wizardWasClicked) {
+      return `${characters.wizard}`
+    } else if (wilmaWasClicked) {
+      return `${characters.wilma}`
+    }
+  }
+
+  // if(gameWon) {
+  //   alert('GAME OVER');
+  // }
+
   return (
-    <div className="App">
+    <div className="App">  
     <Header
+      checkFoundCharacters={checkFoundCharacters}
       characters={characters}
       wilmaWasClicked={wilmaWasClicked}
       wallyWasClicked={wallyWasClicked}
@@ -95,6 +124,9 @@ const App = (props) => {
     />
       <img src={game} alt='game' onClick={handleDropdown}></img>
         {renderDropdown === true ? <Dropdown
+          wilmaWasClicked={wilmaWasClicked}
+          wallyWasClicked={wallyWasClicked}
+          wizardWasClicked={wizardWasClicked}
           visible={renderDropdown}
           handleClick={handleClick}
           onClick={handleDropdown}
