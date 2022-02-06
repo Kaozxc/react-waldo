@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react";
+import React from "react";
 import Timer from "./Timer";
 
 const Header = (props) => {
@@ -11,9 +11,7 @@ const Header = (props) => {
         <div style={style}>
             <p>You have found: {props.checkFoundCharacters()}</p>
             <Timer 
-                wilmaWasClicked={props.wilmaWasClicked}
-                wallyWasClicked={props.wallyWasClicked}
-                wizardWasClicked={props.wizardWasClicked}></Timer>
+                gameWon={props.gameWon}></Timer>
         </div>
     )
 }

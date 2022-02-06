@@ -9,10 +9,10 @@ const Timer = (props) => {
   }, [])
 
   useEffect(() => {
-    if(props.wilmaWasClicked && props.wallyWasClicked && props.wizardWasClicked) {
+    if(props.gameWon) {
         setIsActive(false);
     }
-  }, [props.wilmaWasClicked, props.wallyWasClicked, props.wizardWasClicked])
+  }, [props.gameWon])
 
   useEffect(() => {
     let interval = null;

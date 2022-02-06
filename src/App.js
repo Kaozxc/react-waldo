@@ -6,7 +6,7 @@ import './App.css';
 
 const App = (props) => {
 
-  const [characters, setCharacters] = useState({});
+  const [characters, setCharacters] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [wallyWasClicked, setWallyWasClicked] = useState(false);
   const [wizardWasClicked, setWizardWasClicked] = useState(false);
@@ -42,17 +42,17 @@ const App = (props) => {
       if(coordinates.x <= 521 && coordinates.x >= 495 && coordinates.y <= 309 && coordinates.y >= 262 && e.target.alt === 'wally') {
         alert('You have found Wally!');
         setWallyWasClicked(true);
-        setCharacters({...characters, [e.target.alt]: 'Wally'})
+        setCharacters([...characters,'Wally'])
         setRenderDropdown(false)
       } else if(coordinates.x >= 727 && coordinates.x <= 741 && coordinates.y <= 320 && coordinates.y >= 297 && e.target.alt === 'wilma') {
         alert('You have found Wilma!')
         setWilmaWasClicked(true);
-        setCharacters({...characters, [e.target.alt]: 'Wilma'})
+        setCharacters([...characters,'Wilma'])
         setRenderDropdown(false)
       } else if (coordinates.x >= 0 && coordinates.x <= 12 && coordinates.y >= 244  && coordinates.y <= 282 && e.target.alt === 'wizard') {
         alert('You have found Wizard!');
         setWizardWasClicked(true);
-        setCharacters({...characters, [e.target.alt]: 'Wizard'})
+        setCharacters([...characters,'Wizard'])
         setRenderDropdown(false)
       } else if (e.target.alt === 'wizard') {
         alert(`That's not a Wizard!`)
@@ -89,38 +89,27 @@ const App = (props) => {
   }
 
   const checkFoundCharacters = () => {
-    //console.log('List of found characters:', characters.wilma, characters.wally, characters.wizard)
     if(wilmaWasClicked && wallyWasClicked && wizardWasClicked) {
-      setGameWon(true);
-      alert('Game won')
-      return `${characters.wilma} && ${characters.wally} && ${characters.wizard}`
-    } else if(wilmaWasClicked && wallyWasClicked) {
-      return `${characters.wilma} && ${characters.wally}`
-    } else if (wilmaWasClicked && wizardWasClicked) {
-      return `${characters.wilma} && ${characters.wizard}`
-    } else if (wallyWasClicked && wizardWasClicked) {
-      return `${characters.wally} && ${characters.wizard}`
-    } else if(wallyWasClicked) {
-      return `${characters.wally}`
-    } else if (wizardWasClicked) {
-      return `${characters.wizard}`
-    } else if (wilmaWasClicked) {
-      return `${characters.wilma}`
+      return `${characters}`
+    } else {
+      return `${characters}`
     }
   }
 
-  // if(gameWon) {
-  //   alert('GAME OVER');
-  // }
+  useEffect(() => {
+    if(wilmaWasClicked && wallyWasClicked && wizardWasClicked) {
+      setGameWon(true);
+      alert('You have won');
+      console.log('set game as won');
+    }
+  }, [wilmaWasClicked,wallyWasClicked,wizardWasClicked])
 
   return (
     <div className="App">  
     <Header
       checkFoundCharacters={checkFoundCharacters}
       characters={characters}
-      wilmaWasClicked={wilmaWasClicked}
-      wallyWasClicked={wallyWasClicked}
-      wizardWasClicked={wizardWasClicked}
+      gameWon={gameWon}
     />
       <img src={game} alt='game' onClick={handleDropdown}></img>
         {renderDropdown === true ? <Dropdown
@@ -136,9 +125,3 @@ const App = (props) => {
 }
 
 export default App;
-
-/* {removeDropdown === false ? <Dropdown
-  handleClick={handleClick}
-  onClick={handleDropdown}
-/>: null}
-*/

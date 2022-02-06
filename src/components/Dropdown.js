@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import wally from '../images/wally.jpg'
 import wizard from '../images/wizard.jpg'
 import wilma from '../images/wilma.jpg'
