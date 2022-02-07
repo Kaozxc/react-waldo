@@ -96,11 +96,20 @@ const App = (props) => {
     }
   }
 
+  const Leaderboard = () => {
+    let time = document.getElementsByClassName('time')[0].textContent;
+    let sum = time.slice(-3).trim();
+    console.log('sum: ', sum);
+    let name = prompt('Please provide your name for the SCORE BOARD')
+    alert(`${name} got ${sum}`);
+  }
+
   useEffect(() => {
     if(wilmaWasClicked && wallyWasClicked && wizardWasClicked) {
       setGameWon(true);
       alert('You have won');
       console.log('set game as won');
+      Leaderboard();
     }
   }, [wilmaWasClicked,wallyWasClicked,wizardWasClicked])
 
