@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/react-waldo/static/css/main.91ac8a2c.css",
-    "main.js": "/react-waldo/static/js/main.1c9ddd95.js",
+    "main.css": "/react-waldo/static/css/main.486a7c17.css",
+    "main.js": "/react-waldo/static/js/main.f58724e3.js",
     "static/media/game.jpg": "/react-waldo/static/media/game.6195d923c20e53701cb6.jpg",
     "static/media/wizard.jpg": "/react-waldo/static/media/wizard.72ee272fc17b49292340.jpg",
     "static/media/wilma.jpg": "/react-waldo/static/media/wilma.ac5301aa5b14a22853a1.jpg",
     "static/media/wally.jpg": "/react-waldo/static/media/wally.b070b08cd7ef1dd88254.jpg",
     "index.html": "/react-waldo/index.html",
-    "main.91ac8a2c.css.map": "/react-waldo/static/css/main.91ac8a2c.css.map",
-    "main.1c9ddd95.js.map": "/react-waldo/static/js/main.1c9ddd95.js.map"
+    "main.486a7c17.css.map": "/react-waldo/static/css/main.486a7c17.css.map",
+    "main.f58724e3.js.map": "/react-waldo/static/js/main.f58724e3.js.map"
   },
   "entrypoints": [
-    "static/css/main.91ac8a2c.css",
-    "static/js/main.1c9ddd95.js"
+    "static/css/main.486a7c17.css",
+    "static/js/main.f58724e3.js"
   ]
 }
